@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+<style>
+        :root {
+            --primary: #6C5CE7;
+            --primary-light: #A29BFE;
+            --secondary: #00B894;
+            --dark: #2D3436;
+            --light: #F5F6FA;
+            --accent: #FD79A8;
+            --gray: #636E72;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        
+        .cv-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            display: flex;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: white;
+        }
+        
+        .cv-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            z-index: 1;
+        }
+
+        
+        .left-column {
+            width: 35%;
+            padding: 40px 30px;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        
+        .right-column {
+            width: 65%;
+            padding: 50px 40px;
+            background: white;
+        }
+        
+        /* Avatar Section */
+        .avatar-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .job-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .job-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            margin-bottom: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 16px;
+            color: white;
+            transition: all 0.3s ease;
+            flex-shrink: 0; 
+        }
+        
+        .contact-item:hover .contact-icon {
+            background: var(--accent);
+            transform: rotate(10deg);
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            margin-bottom: 40px;
+        }
+        
+        .skill-category {
+            margin-bottom: 25px;
+        }
+        
+        .skill-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .skill-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .skill-item {
+            margin-bottom: 12px;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .skill-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: white;
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+        }
+        
+        /* Right Column Styles */
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .objective {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid var(--light);
+        }
+        
+        .experience-period {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+        
+        .company-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .position-title {
+            font-style: italic;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .experience-description {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        /* Education Section */
+        .education-item {
+            margin-bottom: 25px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .education-item::before {
+            content: '🎓';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .education-period {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+        
+        .school-name {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .degree {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        /* Activities Section */
+        .activity-item {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .activity-item::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        /* Decorative Elements */
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        
+        .circle-1 {
+            width: 150px;
+            height: 150px;
+            background: white;
+            top: -50px;
+            right: -50px;
+        }
+        
+        .circle-2 {
+            width: 100px;
+            height: 100px;
+            background: var(--accent);
+            bottom: 20px;
+            left: 20px;
+        }
+        
+        @media print {
+            body {
+                background: none;
+            }
+            .cv-container {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Decorative Circles -->
+        <div class="decorative-circle circle-1"></div>
+        <div class="decorative-circle circle-2"></div>
+        
+        <!-- Left Column -->
+        <div class="left-column">
+            <div class="avatar-container">
+                <div class="avatar">
+                    <img src="73e7d05c41e4f7baaef5.jpg">
+                </div>
+                <h1 class="name">NGUYỄN LÊ PHƯƠNG DUY</h1>
+                <div class="job-title">Web Designer</div>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                         <img src="birthday-cake.png" style="width: 20px; height: 20px;">
+                    </div>
+                    <span>12/06/2005</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <img src="phone-call.png" style="width: 20px; height: 20px;">
+                    </div>
+                    <span>0919301372</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <img src="mail.png" style="width: 20px; height: 20px;">
+                    </div>
+                    <span>nlpd1206@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <img src="placeholder.png" style="width: 20px; height: 20px;">
+                    </div>
+                    <span>TP.Cà Mau</span>
+                </div>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="skill-title">Ngoại ngữ</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Tiếng Anh</span>
+                            <span>50%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Tiếng Trung</span>
+                            <span>25%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 25%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-title">Tin học</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Adobe Photoshop</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                        <div class="skill-name">
+                            <span>Microsoft Word</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                        <div class="skill-name">
+                            <span>Microsoft Excel</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="section">
+                <h2 class="section-title">Mục tiêu nghề nghiệp</h2>
+                <p class="objective">
+Tôi mong muốn được làm việc trong lĩnh vực thiết kế web, nơi tôi có thể áp dụng kỹ năng về UI/UX, HTML/CSS và công cụ thiết kế để tạo ra những giao diện thân thiện, hiện đại, mang lại trải nghiệm tốt cho người dùng. Mục tiêu của tôi là trở thành một Web Designer chuyên nghiệp, không ngừng học hỏi và đóng góp vào thành công của các dự án trực tuyến trong doanh nghiệp.                </p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Kinh nghiệm làm việc</h2>
+                    <div class="experience-period">2024 - Hiện tại</div>
+                    <h3 class="company-name">Freelancer – Thiết kế website cho khách hàng cá nhân</h3>
+                    <div class="position-title">Chuyên viên Kinh doanh Cao cấp</div>
+                    <p class="experience-description">
+                        - Thiết kế và xây dựng trang web giới thiệu cá nhân, nhà hàng, shop bán hàng bằng HTML/CSS.<br>
+                        - Thiết kế poster sự kiện.<br>
+                        - Lead Designer 3 dự án web app.
+                    </p>
+            </div>
+            <div class="section">
+                <h2 class="section-title">Học vấn</h2>
+                <div class="education-item">
+                    <div class="education-period">2023 - Hiện tại</div>
+                    <h3 class="school-name">Đại học Bình Dương - Phân hiệu Cà Mau</h3>
+                    <div class="degree">Cử nhân Công nghệ thông tin</div>
+                    <div>GPA: 3.5/4.0</div>
+                </div>
+            </div>
+                <div class="section">
+                <h2 class="section-title">Hoạt động</h2>
+                <div class="activity-item">
+                    Thiết kế miễn phí logo/banner cho tổ chức phi lợi nhuận.
+                </div>
+                <div class="activity-item">
+                    Tổ chức workshop "UI/UX cơ bản" cho 100+ sinh viên.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
